@@ -1,0 +1,13 @@
+FROM gitlab/dind
+
+RUN apt update && \
+    apt install software-properties-common python-software-properties -y && \
+    add-apt-repository ppa:deadsnakes/ppa -y && \
+    apt update -y && \
+    apt install python3.6 -y && \
+    curl https://bootstrap.pypa.io/get-pip.py | python3.6 && \
+    rm -rf /usr/bin/python && \
+    rm -rf /usr/bin/python3 && \
+    ln -s /usr/bin/python3.6 /usr/bin/python3 && \
+    ln -s /usr/bin/python3.6 /usr/bin/python
+RUN service docker start
